@@ -6,6 +6,10 @@ use App\Http\Controllers\Admin\LogController;
 use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/dashboard', function () {
+    return redirect('/admin');
+})->name('dashboard');
+
 Route::get('/', [SiteController::class, 'index'])->name('home');
 Route::get('/features', [SiteController::class, 'features'])->name('features');
 Route::get('/documentation', [SiteController::class, 'documentation'])->name('documentation');
