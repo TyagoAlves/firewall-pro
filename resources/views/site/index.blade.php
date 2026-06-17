@@ -1,0 +1,135 @@
+@extends('layouts.app')
+@section('title', 'Alpine Firewall Pro — Firewall Inteligente para PMEs')
+@section('description', 'Firewall corporativo com painel web, gestão de regras e relatórios. Solução profissional open source para PMEs.')
+@push('head')
+<style>
+    .gradient-text { background: linear-gradient(135deg, #06b6d4, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(6,182,212,0.15), transparent 70%); pointer-events: none; }
+</style>
+@endpush
+@section('content')
+<!-- Hero -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+    <div class="hero-glow top-[-200px] left-[-200px]"></div>
+    <div class="hero-glow bottom-[-300px] right-[-200px]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-4 py-1.5 text-sm text-cyan-400 mb-8">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            Open Source &bull; LGPD Compliant
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
+            Firewall <span class="gradient-text">Inteligente</span><br>
+            para Sua Empresa
+        </h1>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+            Controle total sobre o tráfego de rede com painel web, gestão visual de regras, relatórios em tempo real e 100% compatível com a LGPD. Sem appliances caros. Sem complexidade.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="/login" class="bg-cyan-500 hover:bg-cyan-400 text-black font-bold px-8 py-4 rounded-xl text-lg transition shadow-lg shadow-cyan-500/25">Começar Grátis</a>
+            <a href="/features" class="border border-gray-700 hover:border-cyan-500/50 text-gray-300 font-semibold px-8 py-4 rounded-xl text-lg transition">Ver Recursos</a>
+        </div>
+        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+            <div><div class="text-3xl font-bold text-cyan-400">&lt;50MB</div><div class="text-sm text-gray-500">Consumo de RAM</div></div>
+            <div><div class="text-3xl font-bold text-cyan-400">5s</div><div class="text-sm text-gray-500">Implantação</div></div>
+            <div><div class="text-3xl font-bold text-cyan-400">100%</div><div class="text-sm text-gray-500">Open Source</div></div>
+            <div><div class="text-3xl font-bold text-cyan-400">LGPD</div><div class="text-sm text-gray-500">Compatível</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Preview -->
+<section class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="text-cyan-400 text-sm font-semibold uppercase tracking-wider">Por que escolher o Alpine Pro</span>
+            <h2 class="text-4xl font-bold mt-3">Tudo que você precisa para<br>controlar sua rede</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:border-cyan-500/30 transition group">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-5 group-hover:scale-110 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Painel Web</h3>
+                <p class="text-gray-400 text-sm">Interface intuitiva para gerenciar regras, visualizar tráfego e monitorar bloqueios em tempo real. Sem editar arquivos ou digitar comandos.</p>
+            </div>
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:border-cyan-500/30 transition group">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-5 group-hover:scale-110 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Gestão de Regras</h3>
+                <p class="text-gray-400 text-sm">Adicione, edite, ative ou desative regras de bloqueio com poucos cliques. Interface visual com preview do comando iptables gerado.</p>
+            </div>
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:border-cyan-500/30 transition group">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-5 group-hover:scale-110 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Relatórios</h3>
+                <p class="text-gray-400 text-sm">Acompanhe estatísticas de bloqueio, domínios mais acessados, tráfego por período e muito mais. Decisões baseadas em dados.</p>
+            </div>
+        </div>
+        <div class="text-center mt-10">
+            <a href="/features" class="text-cyan-400 hover:text-cyan-300 font-semibold">Ver todos os recursos &rarr;</a>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Preview -->
+<section class="py-24 bg-gray-900/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="text-cyan-400 text-sm font-semibold uppercase tracking-wider">Preços</span>
+        <h2 class="text-4xl font-bold mt-3 mb-12">Planos para todos os tamanhos</h2>
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 text-left">
+                <h3 class="text-xl font-bold">Community</h3>
+                <div class="text-3xl font-bold mt-4">Grátis</div>
+                <p class="text-gray-500 text-sm mt-1">Para projetos pessoais e laboratórios</p>
+                <ul class="mt-6 space-y-3 text-sm text-gray-400">
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Firewall Alpine Linux</li>
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Regras iptables manuais</li>
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Docker + KVM</li>
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Documentação completa</li>
+                </ul>
+                <a href="https://github.com" class="mt-8 block text-center border border-gray-700 hover:border-cyan-500/50 rounded-xl py-3 font-semibold transition">Acessar</a>
+            </div>
+            <div class="bg-gray-900 border-2 border-cyan-500 rounded-2xl p-8 text-left relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-xs font-bold px-4 py-1 rounded-full">Popular</div>
+                <h3 class="text-xl font-bold">Pro</h3>
+                <div class="text-3xl font-bold mt-4">R$ 97<span class="text-lg text-gray-500">/mês</span></div>
+                <p class="text-gray-500 text-sm mt-1">Para PMEs que precisam de controle</p>
+                <ul class="mt-6 space-y-3 text-sm text-gray-400">
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Tudo do Community</li>
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Painel Web Interativo</li>
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Gestão Visual de Regras</li>
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Relatórios e Estatísticas</li>
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> API REST</li>
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Suporte Prioritário</li>
+                </ul>
+                <a href="/login" class="mt-8 block bg-cyan-500 text-black text-center rounded-xl py-3 font-bold hover:bg-cyan-400 transition shadow-lg shadow-cyan-500/25">Começar Trial</a>
+            </div>
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 text-left">
+                <h3 class="text-xl font-bold">Enterprise</h3>
+                <div class="text-3xl font-bold mt-4">Sob Medida</div>
+                <p class="text-gray-500 text-sm mt-1">Para empresas com necessidades específicas</p>
+                <ul class="mt-6 space-y-3 text-sm text-gray-400">
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Tudo do Pro</li>
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Multi-tenant</li>
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> SLA Personalizado</li>
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Suporte 24/7</li>
+                    <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> On-premise ou Cloud</li>
+                </ul>
+                <a href="/contact" class="mt-8 block border border-gray-700 hover:border-cyan-500/50 rounded-xl py-3 font-semibold transition">Falar com Vendas</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-24 text-center relative">
+    <div class="hero-glow top-[-200px] left-[-200px]"></div>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <h2 class="text-4xl font-bold mb-6">Pronto para <span class="gradient-text">assumir o controle</span>?</h2>
+        <p class="text-xl text-gray-400 mb-10">Implante em segundos. Sem burocracia. Sem compromisso.</p>
+        <a href="/login" class="bg-cyan-500 hover:bg-cyan-400 text-black font-bold px-8 py-4 rounded-xl text-lg transition shadow-lg shadow-cyan-500/25">Começar Gratuitamente</a>
+    </div>
+</section>
+@endsection
