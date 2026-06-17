@@ -1,58 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <img src="https://img.shields.io/badge/Laravel-11-FF2D20?logo=laravel" alt="Laravel 11">
+    <img src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss" alt="Tailwind CSS">
+    <img src="https://img.shields.io/badge/SQLite-003B57?logo=sqlite" alt="SQLite">
+    <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License">
 </p>
 
-## About Laravel
+<h1 align="center">🔥 Alpine Firewall Pro</h1>
+<p align="center">
+    <strong>Painel web interativo para gerenciamento de firewall com iptables</strong>
+    <br>
+    Interface administrativa completa, API REST, relatórios e suporte multi-tenant.
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<hr>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📋 Sobre
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+O **Alpine Firewall Pro** é a versão completa do [Alpine Firewall](https://github.com/anomalyco/alpine-firewall), um sistema de bloqueio de conteúdo baseado em Docker + KVM, com foco em:
 
-## Learning Laravel
+- **PMEs e projetos pessoais** — controle de acesso à internet simples e eficaz
+- **LGPD e segurança** — logs de auditoria, criptografia em trânsito, relatórios de compliance
+- **Gestão visual** — cadastro e ativação de regras sem editar scripts manualmente
+- **API REST** — integração com outros sistemas e automação
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ✨ Funcionalidades
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Funcionalidade | Descrição |
+|---|---|
+| **Painel Admin** | Dashboard com estatísticas, regras ativas, logs recentes |
+| **Regras de Firewall** | CRUD completo com toggle ativar/desativar, preview de iptables |
+| **Logs de Bloqueio** | Histórico com data, IP, domínio, chain e ação |
+| **API REST** | Endpoints para gerenciar regras, consultar logs e estatísticas |
+| **Configurações** | Timezone, limits de log, templates de iptables |
+| **Multi-tenant** | Usuários independentes com suas próprias regras e logs |
+| **Suporte Premium** | E-mail e chat prioritário (assinatura Pro) |
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🚀 Início Rápido
 
 ```bash
-composer require laravel/boost --dev
+# Clone
+git clone https://github.com/seu-user/alpine-firewall-pro.git
+cd alpine-firewall-pro
 
-php artisan boost:install
+# Configure o ambiente
+cp .env.example .env
+php artisan key:generate
+
+# Instale dependências
+composer install
+npm ci && npm run build
+
+# Banco de dados e seed
+php artisan migrate --seed
+
+# Inicie o servidor
+php artisan serve --host=0.0.0.0 --port=8000
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Acesse **http://localhost:8000** — login: `admin@firewallpro.com` / `admin123`
 
-## Contributing
+### Docker
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+docker compose up -d
+```
 
-## Code of Conduct
+## 🐳 Deploy em Produção
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+# Servidor Ubuntu/Debian
+sudo apt install -y nginx php8.3-fpm php8.3-mbstring php8.3-xml \
+  php8.3-curl php8.3-sqlite3 php8.3-gd php8.3-zip unzip composer
 
-## Security Vulnerabilities
+# Clone e configure
+cd /var/www
+git clone https://github.com/seu-user/alpine-firewall-pro.git
+cd alpine-firewall-pro
+cp .env.example .env
+php artisan key:generate
+composer install --no-dev
+php artisan migrate --seed
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Configure o Nginx com SSL (veja a [documentação completa](/documentation)).
 
-## License
+## 📚 Documentação
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Documentação completa disponível em **http://localhost:8000/documentation**:
+- Início rápido e instalação
+- Painel administrativo
+- Gerenciamento de regras
+- API REST (endpoints, exemplos, autenticação)
+- Deploy em produção com Nginx + SSL
+- Segurança e conformidade LGPD
+- Troubleshooting e FAQ
+
+## 🧪 Testes
+
+```bash
+php artisan test
+```
+
+## 🛣️ Roadmap
+
+- [x] Painel admin com CRUD de regras
+- [x] Logs de bloqueio
+- [x] API REST básica
+- [x] Documentação completa
+- [ ] Autenticação via API (Sanctum)
+- [ ] Multi-tenant avançado
+- [ ] Relatórios exportáveis (PDF/CSV)
+- [ ] Notificações em tempo real
+- [ ] Integração com Docker compose
+
+## 📄 Licença
+
+Este projeto é licenciado sob a [MIT License](LICENSE).
+
+## 🤝 Suporte
+
+Para suporte comercial (Pro): **contato@firewallpro.com**
