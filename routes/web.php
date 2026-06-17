@@ -31,6 +31,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/logs', [LogController::class, 'index'])->name('logs');
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+    Route::post('/settings/generate-token', [SettingController::class, 'generateToken'])->name('settings.generate-token');
 });
 
 require __DIR__.'/auth.php';

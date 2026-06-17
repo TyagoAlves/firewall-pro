@@ -35,6 +35,26 @@
                     </div>
                 </form>
             </div>
+
+            <!-- API Token -->
+            <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 mt-8">
+                <h3 class="text-lg font-semibold text-gray-100 mb-4">API Token</h3>
+                <p class="text-sm text-gray-400 mb-4">Use este token para autenticar nas chamadas à API REST.</p>
+                @if(session('api_token'))
+                    <div class="bg-gray-950 border border-cyan-500/30 rounded-xl p-4 mb-4">
+                        <code class="text-cyan-400 text-sm break-all">{{ session('api_token') }}</code>
+                    </div>
+                    <p class="text-xs text-yellow-400 mb-4">Anote este token agora. Ele não será mostrado novamente.</p>
+                @else
+                    <div class="bg-gray-950 border border-gray-700 rounded-xl p-4 mb-4">
+                        <code class="text-gray-500 text-sm">Clique em "Gerar Novo Token" para criar um token de API</code>
+                    </div>
+                @endif
+                <form method="POST" action="{{ route('admin.settings.generate-token') }}">
+                    @csrf
+                    <button type="submit" class="px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-xl transition shadow-lg shadow-cyan-500/25">Gerar Novo Token</button>
+                </form>
+            </div>
         </div>
     </div>
 </x-app-layout>

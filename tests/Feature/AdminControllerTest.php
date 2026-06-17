@@ -151,7 +151,17 @@ class AdminControllerTest extends TestCase
     public function test_settings_update(): void
     {
         $this->actingAs($this->admin)
-            ->post('/admin/settings', ['key' => 'timezone', 'value' => 'America/Sao_Paulo'])
+            ->post('/admin/settings', ['app_name' => 'Meu Firewall', 'log_retention_days' => '30'])
             ->assertStatus(302);
+
+        $this->assertDatabaseHas('settings', ['key' => 'app_name', 'value' => 'Meu Firewall']);
+    }
+
+    public function test_generate_token(): void
+    {
+        $this->actingAs($this->admin)
+            ->post('/admin/settings/generate-token')
+            ->assertStatus(302)
+            ->assertSessionHas('api_token');
     }
 }

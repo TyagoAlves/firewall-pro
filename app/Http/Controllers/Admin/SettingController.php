@@ -17,4 +17,8 @@ class SettingController extends Controller
         }
         return back()->with('success', 'Configurações salvas.');
     }
+    public function generateToken(Request $request) {
+        $token = $request->user()->createToken('api-access')->plainTextToken;
+        return back()->with('api_token', $token);
+    }
 }
