@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpine Firewall Pro — Documentação</title>
+<style>
+  :root {
+    --primary: #0f172a;
+    --secondary: #1e293b;
+    --accent: #06b6d4;
+    --accent2: #22d3ee;
+    --accent3: #0891b2;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --card: #1e293b;
+    --card-border: #334155;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--primary);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    border-bottom: 1px solid var(--card-border);
+    padding: 48px 0 32px;
+    text-align: center;
+  }
+  header h1 {
+    font-size: 2.8em;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  header p { color: var(--text-dim); font-size: 1.15em; }
+
+  nav {
+    position: sticky;
+    top: 0;
+    background: var(--primary);
+    border-bottom: 1px solid var(--card-border);
+    z-index: 100;
+    padding: 12px 0;
+  }
+  nav .container { display: flex; gap: 24px; overflow-x: auto; }
+  nav a { color: var(--text-dim); text-decoration: none; font-size: 0.9em; white-space: nowrap; }
+  nav a:hover { color: var(--accent); }
+
+  section { padding: 48px 0; border-bottom: 1px solid var(--card-border); }
+  section:last-child { border-bottom: none; }
+  h2 { font-size: 1.8em; font-weight: 600; margin-bottom: 24px; color: var(--accent); }
+  h3 { font-size: 1.3em; font-weight: 600; margin: 32px 0 16px; }
+  h4 { font-size: 1.1em; font-weight: 600; margin: 24px 0 12px; color: var(--accent2); }
+  p { margin-bottom: 16px; color: var(--text-muted); }
+  a { color: var(--accent); }
+  a:hover { color: var(--accent2); }
+
+  .info-box {
+    background: linear-gradient(135deg, rgba(6,182,212,0.08), rgba(34,211,238,0.03));
+    border: 1px solid rgba(6,182,212,0.2);
+    border-radius: 0.6rem;
+    padding: 1.2rem;
+    margin: 1rem 0 1.5rem;
+  }
+  .info-box p { color: var(--text); margin: 0; font-size: 0.9rem; }
+
+  .badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 0.3rem; font-size: 0.7rem; font-weight: 600; }
+  .badge-green { background: rgba(16,185,129,0.15); color: var(--success); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--accent); }
+
+  pre {
+    background: #0b1120;
+    border: 1px solid var(--card-border);
+    border-radius: 0.6rem;
+    padding: 1.2rem;
+    overflow-x: auto;
+    color: #e2e8f0;
+    font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    margin: 1rem 0 1.5rem;
+  }
+  code {
+    font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    font-size: 0.9em;
+    background: rgba(6,182,212,0.1);
+    color: var(--accent2);
+    padding: 0.15rem 0.4rem;
+    border-radius: 0.25rem;
+  }
+  pre code { background: none; padding: 0; border-radius: 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.9rem; }
+  th, td { padding: 0.6rem 0.8rem; text-align: left; border: 1px solid var(--card-border); }
+  th { background: var(--card); color: var(--accent); font-weight: 600; font-size: 0.82rem; text-transform: uppercase; }
+  td { color: var(--text); }
+  tr:hover td { background: rgba(30,41,59,0.5); }
+
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0 1.5rem; }
+  .card-item { background: var(--card); border: 1px solid var(--card-border); border-radius: 0.6rem; padding: 1.2rem; }
+  .card-item h4 { margin: 0 0 0.3rem; font-size: 0.9rem; color: var(--accent); }
+  .card-item p { font-size: 0.82rem; margin: 0; color: var(--text-dim); }
+
+  footer { text-align: center; padding: 32px 0; color: var(--text-dim); font-size: 0.85em; }
+
+  ul, ol { padding-left: 24px; margin-bottom: 16px; color: var(--text-muted); }
+  li { margin-bottom: 0.3rem; }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 2em; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Alpine Firewall Pro</h1>
+    <p>Painel web interativo para gerenciamento de firewall com iptables</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a href="#sobre">Sobre</a>
+    <a href="#features">Funcionalidades</a>
+    <a href="#instalacao">Instalação</a>
+    <a href="#deploy">Deploy</a>
+    <a href="#api">API</a>
+    <a href="#suporte">Suporte</a>
+  </div>
+</nav>
+
+<main class="container">
+
+<section id="sobre">
+  <h2>Sobre</h2>
+  <p>
+    O <strong>Alpine Firewall Pro</strong> é um sistema completo de bloqueio de conteúdo
+    baseado em Docker + KVM, com painel web Laravel para gerenciamento visual de regras
+    de firewall, logs de auditoria, API REST e suporte multi-tenant.
+  </p>
+
+  <div class="info-box">
+    <p><strong>🚀 Status:</strong> Painel admin ativo, CRUD de regras, logs de bloqueio, API REST, documentação embarcada. Login: <code>admin@firewallpro.com</code> / <code>admin123</code></p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card-item"><h4>📊 Painel Admin</h4><p>Dashboard com estatísticas, regras ativas, logs recentes e gráficos</p></div>
+    <div class="card-item"><h4>📝 Regras de Firewall</h4><p>CRUD completo com toggle ativar/desativar, preview de iptables</p></div>
+    <div class="card-item"><h4>📋 Logs de Bloqueio</h4><p>Histórico com data, IP, domínio, chain e ação</p></div>
+    <div class="card-item"><h4>🌐 API REST</h4><p>Endpoints para gerenciar regras, consultar logs e estatísticas</p></div>
+    <div class="card-item"><h4>👥 Multi-tenant</h4><p>Usuários independentes com suas próprias regras e logs</p></div>
+    <div class="card-item"><h4>🔒 LGPD</h4><p>Logs de auditoria, criptografia em trânsito, relatórios de compliance</p></div>
+  </div>
+</section>
+
+<section id="features">
+  <h2>Funcionalidades</h2>
+  <table>
+    <tr><th>Funcionalidade</th><th>Descrição</th></tr>
+    <tr><td><strong>Painel Admin</strong></td><td>Dashboard com estatísticas, regras ativas, logs recentes</td></tr>
+    <tr><td><strong>CRUD de Regras</strong></td><td>Criação, edição, ativação/desativação com preview de iptables</td></tr>
+    <tr><td><strong>Logs de Bloqueio</strong></td><td>Histórico completo com data, IP, domínio, chain e ação</td></tr>
+    <tr><td><strong>API REST</strong></td><td>Endpoints para gerenciar regras, consultar logs e estatísticas</td></tr>
+    <tr><td><strong>Multi-tenant</strong></td><td>Usuários independentes com suas próprias regras</td></tr>
+    <tr><td><strong>Docker</strong></td><td>Deploy simplificado com docker compose</td></tr>
+    <tr><td><strong>Suporte Premium</strong></td><td>E-mail e chat prioritário (assinatura Pro)</td></tr>
+  </table>
+</section>
+
+<section id="instalacao">
+  <h2>Início Rápido</h2>
+
+  <h3>Local</h3>
+  <pre><code><span class="cm"># Clone</span>
+git clone https://github.com/TyagoAlves/firewall-pro.git
+cd firewall-pro
+
+<span class="cm"># Configure o ambiente</span>
+cp .env.example .env
+php artisan key:generate
+
+<span class="cm"># Instale dependências</span>
+composer install
+npm ci && npm run build
+
+<span class="cm"># Banco de dados e seed</span>
+php artisan migrate --seed
+
+<span class="cm"># Inicie o servidor</span>
+php artisan serve --host=0.0.0.0 --port=8000</code></pre>
+
+  <p>Acesse <strong>http://localhost:8000</strong> — login: <code>admin@firewallpro.com</code> / <code>admin123</code></p>
+
+  <h3>Docker</h3>
+  <pre><code>docker compose up -d</code></pre>
+</section>
+
+<section id="deploy">
+  <h2>Deploy em Produção</h2>
+  <pre><code><span class="cm"># Servidor Ubuntu/Debian</span>
+sudo apt install -y nginx php8.3-fpm php8.3-mbstring php8.3-xml \
+  php8.3-curl php8.3-sqlite3 php8.3-gd php8.3-zip unzip composer
+
+<span class="cm"># Clone e configure</span>
+cd /var/www
+git clone https://github.com/TyagoAlves/firewall-pro.git
+cd firewall-pro
+cp .env.example .env
+php artisan key:generate
+composer install --no-dev
+php artisan migrate --seed
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache</code></pre>
+
+  <p>Configure o Nginx com SSL para apontar para a pasta <code>public/</code>.</p>
+</section>
+
+<section id="api">
+  <h2>API REST</h2>
+  <p>A API permite gerenciar regras, consultar logs e estatísticas programaticamente.</p>
+
+  <table>
+    <tr><th>Endpoint</th><th>Método</th><th>Descrição</th></tr>
+    <tr><td><code>/api/rules</code></td><td>GET</td><td>Lista regras de firewall</td></tr>
+    <tr><td><code>/api/rules</code></td><td>POST</td><td>Cria nova regra</td></tr>
+    <tr><td><code>/api/rules/{id}</code></td><td>PUT</td><td>Atualiza regra</td></tr>
+    <tr><td><code>/api/rules/{id}</code></td><td>DELETE</td><td>Remove regra</td></tr>
+    <tr><td><code>/api/logs</code></td><td>GET</td><td>Consulta logs de bloqueio</td></tr>
+    <tr><td><code>/api/stats</code></td><td>GET</td><td>Estatísticas do firewall</td></tr>
+  </table>
+</section>
+
+<section id="suporte">
+  <h2>Licenciamento</h2>
+  <p>Este projeto é licenciado sob a <strong>MIT License</strong> — 100% open source.</p>
+
+  <p>Para suporte comercial (Pro): <strong>contato@firewallpro.com</strong></p>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <p>Alpine Firewall Pro — Laravel · Tailwind · SQLite · Docker</p>
+    <p style="margin-top:0.3rem; font-size:0.8rem;">
+      <a href="https://github.com/TyagoAlves/firewall-pro">GitHub</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
