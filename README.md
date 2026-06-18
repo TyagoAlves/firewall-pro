@@ -5,7 +5,7 @@
     <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License">
 </p>
 
-<h1 align="center">🔥 Alpine Firewall Pro </h1> [documentação completa](https://tyagoalves.github.io/firewall-pro/)).
+<h1 align="center">🔥 Alpine Firewall Pro </h1> <hr> [documentação completa](https://tyagoalves.github.io/firewall-pro/).</hr>
 <p align="center">
     <strong>Painel web interativo para gerenciamento de firewall com iptables</strong>
     <br>
@@ -65,7 +65,7 @@ Acesse **http://localhost:8000** — login: `admin@firewallpro.com` / `admin123`
 docker compose up -d
 ```
 
-## 🐳 Deploy em Produção
+## 🐳 Deploy em Produção 
 
 ```bash
 # Servidor Ubuntu/Debian
@@ -81,7 +81,7 @@ php artisan key:generate
 composer install --no-dev
 php artisan migrate --seed
 php artisan config:cache
-php artisan route:cache
+php artisan route:cache 
 php artisan view:cache
 ```
 
