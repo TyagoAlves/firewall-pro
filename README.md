@@ -5,7 +5,7 @@
     <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License">
 </p>
 
-<h1 align="center">🔥 Alpine Firewall Pro</h1>
+<h1 align="center">🔥 Alpine Firewall Pro </h1> [documentação completa](https://tyagoalves.github.io/firewall-pro/)).
 <p align="center">
     <strong>Painel web interativo para gerenciamento de firewall com iptables</strong>
     <br>
@@ -16,7 +16,7 @@
 
 ## 📋 Sobre
 
-O **Alpine Firewall Pro** é a versão completa do [Alpine Firewall](https://github.com/anomalyco/alpine-firewall), um sistema de bloqueio de conteúdo baseado em Docker + KVM, com foco em:
+O **Alpine Firewall Pro** é um sistema de bloqueio de conteúdo baseado em Docker + KVM, com foco em:
 
 - **PMEs e projetos pessoais** — controle de acesso à internet simples e eficaz
 - **LGPD e segurança** — logs de auditoria, criptografia em trânsito, relatórios de compliance
@@ -85,7 +85,7 @@ php artisan route:cache
 php artisan view:cache
 ```
 
-Configure o Nginx com SSL (veja a [documentação completa](/documentation)).
+Configure o Nginx com SSL (veja a [documentação completa](https://tyagoalves.github.io/firewall-pro/)).
 
 ## 📚 Documentação
 
