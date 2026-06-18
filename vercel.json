@@ -1,0 +1,8 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/firewall-pro/:path*", "destination": "/:path*" },
+    { "source": "/firewall-pro", "destination": "/" }
+  ]
+}
