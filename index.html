@@ -1,269 +1,231 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alpine Firewall Pro — Documentação</title>
-<style>
-  :root {
-    --primary: #0f172a;
-    --secondary: #1e293b;
-    --accent: #06b6d4;
-    --accent2: #22d3ee;
-    --accent3: #0891b2;
-    --text: #f1f5f9;
-    --text-muted: #94a3b8;
-    --text-dim: #64748b;
-    --success: #10b981;
-    --danger: #ef4444;
-    --warning: #f59e0b;
-    --card: #1e293b;
-    --card-border: #334155;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--primary);
-    color: var(--text);
-    line-height: 1.7;
-  }
-
-  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
-
-  header {
-    border-bottom: 1px solid var(--card-border);
-    padding: 48px 0 32px;
-    text-align: center;
-  }
-  header h1 {
-    font-size: 2.8em;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 8px;
-  }
-  header p { color: var(--text-dim); font-size: 1.15em; }
-
-  nav {
-    position: sticky;
-    top: 0;
-    background: var(--primary);
-    border-bottom: 1px solid var(--card-border);
-    z-index: 100;
-    padding: 12px 0;
-  }
-  nav .container { display: flex; gap: 24px; overflow-x: auto; }
-  nav a { color: var(--text-dim); text-decoration: none; font-size: 0.9em; white-space: nowrap; }
-  nav a:hover { color: var(--accent); }
-
-  section { padding: 48px 0; border-bottom: 1px solid var(--card-border); }
-  section:last-child { border-bottom: none; }
-  h2 { font-size: 1.8em; font-weight: 600; margin-bottom: 24px; color: var(--accent); }
-  h3 { font-size: 1.3em; font-weight: 600; margin: 32px 0 16px; }
-  h4 { font-size: 1.1em; font-weight: 600; margin: 24px 0 12px; color: var(--accent2); }
-  p { margin-bottom: 16px; color: var(--text-muted); }
-  a { color: var(--accent); }
-  a:hover { color: var(--accent2); }
-
-  .info-box {
-    background: linear-gradient(135deg, rgba(6,182,212,0.08), rgba(34,211,238,0.03));
-    border: 1px solid rgba(6,182,212,0.2);
-    border-radius: 0.6rem;
-    padding: 1.2rem;
-    margin: 1rem 0 1.5rem;
-  }
-  .info-box p { color: var(--text); margin: 0; font-size: 0.9rem; }
-
-  .badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 0.3rem; font-size: 0.7rem; font-weight: 600; }
-  .badge-green { background: rgba(16,185,129,0.15); color: var(--success); }
-  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--accent); }
-
-  pre {
-    background: #0b1120;
-    border: 1px solid var(--card-border);
-    border-radius: 0.6rem;
-    padding: 1.2rem;
-    overflow-x: auto;
-    color: #e2e8f0;
-    font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
-    font-size: 0.82rem;
-    line-height: 1.6;
-    margin: 1rem 0 1.5rem;
-  }
-  code {
-    font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
-    font-size: 0.9em;
-    background: rgba(6,182,212,0.1);
-    color: var(--accent2);
-    padding: 0.15rem 0.4rem;
-    border-radius: 0.25rem;
-  }
-  pre code { background: none; padding: 0; border-radius: 0; }
-
-  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.9rem; }
-  th, td { padding: 0.6rem 0.8rem; text-align: left; border: 1px solid var(--card-border); }
-  th { background: var(--card); color: var(--accent); font-weight: 600; font-size: 0.82rem; text-transform: uppercase; }
-  td { color: var(--text); }
-  tr:hover td { background: rgba(30,41,59,0.5); }
-
-  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0 1.5rem; }
-  .card-item { background: var(--card); border: 1px solid var(--card-border); border-radius: 0.6rem; padding: 1.2rem; }
-  .card-item h4 { margin: 0 0 0.3rem; font-size: 0.9rem; color: var(--accent); }
-  .card-item p { font-size: 0.82rem; margin: 0; color: var(--text-dim); }
-
-  footer { text-align: center; padding: 32px 0; color: var(--text-dim); font-size: 0.85em; }
-
-  ul, ol { padding-left: 24px; margin-bottom: 16px; color: var(--text-muted); }
-  li { margin-bottom: 0.3rem; }
-
-  @media (max-width: 600px) {
-    header h1 { font-size: 2em; }
-    .card-grid { grid-template-columns: 1fr; }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpine Firewall Pro — Firewall Inteligente para PMEs</title>
+  <meta name="description" content="Firewall corporativo com painel web, gestão de regras e relatórios. Solução profissional open source para PMEs." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: { gray: { 950: '#0a0e1a' } },
+        },
+      },
+    };
+  </script>
+  <style>
+    .gradient-text { background: linear-gradient(135deg, #06b6d4, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(6,182,212,0.15), transparent 70%); pointer-events: none; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
-<body>
+<body class="bg-[#0a0e1a] text-gray-100 font-sans antialiased">
 
-<header>
-  <div class="container">
-    <h1>Alpine Firewall Pro</h1>
-    <p>Painel web interativo para gerenciamento de firewall com iptables</p>
-  </div>
-</header>
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a0e1a]/80 backdrop-blur-xl border-b border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="/" class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-black font-bold text-sm">AF</span>
+          <span class="font-bold text-lg">Alpine<span class="text-cyan-400">Pro</span></span>
+        </a>
+        <div class="hidden md:flex items-center gap-6 text-sm">
+          <a href="/features" class="text-gray-400 hover:text-white transition">Recursos</a>
+          <a href="/documentation" class="text-gray-400 hover:text-white transition">Documentação</a>
+          <a href="/pricing" class="text-gray-400 hover:text-white transition">Preços</a>
+          <a href="/security" class="text-gray-400 hover:text-white transition">Segurança</a>
+          <a href="/contact" class="text-gray-400 hover:text-white transition">Contato</a>
+          <a href="/login" class="text-gray-400 hover:text-white transition">Entrar</a>
+          <a href="/login" class="bg-cyan-500 text-black px-4 py-2 rounded-lg font-semibold hover:bg-cyan-400 transition">Começar</a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden text-gray-400 hover:text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-gray-800 bg-gray-900">
+      <div class="px-4 py-4 space-y-3">
+        <a href="/features" class="block text-gray-400 hover:text-white">Recursos</a>
+        <a href="/documentation" class="block text-gray-400 hover:text-white">Documentação</a>
+        <a href="/pricing" class="block text-gray-400 hover:text-white">Preços</a>
+        <a href="/security" class="block text-gray-400 hover:text-white">Segurança</a>
+        <a href="/contact" class="block text-gray-400 hover:text-white">Contato</a>
+        <a href="/login" class="block text-gray-400 hover:text-white">Entrar</a>
+        <a href="/login" class="block bg-cyan-500 text-black px-4 py-2 rounded-lg font-semibold text-center">Começar</a>
+      </div>
+    </div>
+  </nav>
 
-<nav>
-  <div class="container">
-    <a href="#sobre">Sobre</a>
-    <a href="#features">Funcionalidades</a>
-    <a href="#instalacao">Instalação</a>
-    <a href="#deploy">Deploy</a>
-    <a href="#api">API</a>
-    <a href="#suporte">Suporte</a>
-  </div>
-</nav>
+  <!-- Hero -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+    <div class="hero-glow top-[-200px] left-[-200px]"></div>
+    <div class="hero-glow bottom-[-300px] right-[-200px]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full px-4 py-1.5 text-sm text-cyan-400 mb-8">
+        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+        Open Source &bull; LGPD Compliant
+      </div>
+      <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
+        Firewall <span class="gradient-text">Inteligente</span><br>
+        para Sua Empresa
+      </h1>
+      <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+        Controle total sobre o tráfego de rede com painel web, gestão visual de regras, relatórios em tempo real e 100% compatível com a LGPD. Sem appliances caros. Sem complexidade.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/login" class="bg-cyan-500 hover:bg-cyan-400 text-black font-bold px-8 py-4 rounded-xl text-lg transition shadow-lg shadow-cyan-500/25">Começar Grátis</a>
+        <a href="/features" class="border border-gray-700 hover:border-cyan-500/50 text-gray-300 font-semibold px-8 py-4 rounded-xl text-lg transition">Ver Recursos</a>
+      </div>
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto">
+        <div><div class="text-3xl font-bold text-cyan-400">&lt;50MB</div><div class="text-sm text-gray-500">Consumo de RAM</div></div>
+        <div><div class="text-3xl font-bold text-cyan-400">5s</div><div class="text-sm text-gray-500">Implantação</div></div>
+        <div><div class="text-3xl font-bold text-cyan-400">100%</div><div class="text-sm text-gray-500">Open Source</div></div>
+        <div><div class="text-3xl font-bold text-cyan-400">LGPD</div><div class="text-sm text-gray-500">Compatível</div></div>
+      </div>
+    </div>
+  </section>
 
-<main class="container">
+  <!-- Features -->
+  <section class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span class="text-cyan-400 text-sm font-semibold uppercase tracking-wider">Por que escolher o Alpine Pro</span>
+        <h2 class="text-4xl font-bold mt-3">Tudo que você precisa para<br>controlar sua rede</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:border-cyan-500/30 transition group">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-5 group-hover:scale-110 transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Painel Web</h3>
+          <p class="text-gray-400 text-sm">Interface intuitiva para gerenciar regras, visualizar tráfego e monitorar bloqueios em tempo real. Sem editar arquivos ou digitar comandos.</p>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:border-cyan-500/30 transition group">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-5 group-hover:scale-110 transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" /></svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Gestão de Regras</h3>
+          <p class="text-gray-400 text-sm">Adicione, edite, ative ou desative regras de bloqueio com poucos cliques. Interface visual com preview do comando iptables gerado.</p>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 hover:border-cyan-500/30 transition group">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-5 group-hover:scale-110 transition">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Relatórios</h3>
+          <p class="text-gray-400 text-sm">Acompanhe estatísticas de bloqueio, domínios mais acessados, tráfego por período e muito mais. Decisões baseadas em dados.</p>
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <a href="/features" class="text-cyan-400 hover:text-cyan-300 font-semibold">Ver todos os recursos &rarr;</a>
+      </div>
+    </div>
+  </section>
 
-<section id="sobre">
-  <h2>Sobre</h2>
-  <p>
-    O <strong>Alpine Firewall Pro</strong> é um sistema completo de bloqueio de conteúdo
-    baseado em Docker + KVM, com painel web Laravel para gerenciamento visual de regras
-    de firewall, logs de auditoria, API REST e suporte multi-tenant.
-  </p>
+  <!-- Pricing -->
+  <section class="py-24 bg-gray-900/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-cyan-400 text-sm font-semibold uppercase tracking-wider">Preços</span>
+      <h2 class="text-4xl font-bold mt-3 mb-12">Planos para todos os tamanhos</h2>
+      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 text-left">
+          <h3 class="text-xl font-bold">Community</h3>
+          <div class="text-3xl font-bold mt-4">Grátis</div>
+          <p class="text-gray-500 text-sm mt-1">Para projetos pessoais e laboratórios</p>
+          <ul class="mt-6 space-y-3 text-sm text-gray-400">
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Firewall Alpine Linux</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Regras iptables manuais</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Docker + KVM</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Documentação completa</li>
+          </ul>
+          <a href="https://github.com/TyagoAlves/firewall-pro" class="mt-8 block text-center border border-gray-700 hover:border-cyan-500/50 rounded-xl py-3 font-semibold transition">Acessar</a>
+        </div>
+        <div class="bg-gray-900 border-2 border-cyan-500 rounded-2xl p-8 text-left relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-cyan-500 text-black text-xs font-bold px-4 py-1 rounded-full">Popular</div>
+          <h3 class="text-xl font-bold">Pro</h3>
+          <div class="text-3xl font-bold mt-4">R$ 97<span class="text-lg text-gray-500">/mês</span></div>
+          <p class="text-gray-500 text-sm mt-1">Para PMEs que precisam de controle</p>
+          <ul class="mt-6 space-y-3 text-sm text-gray-400">
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Tudo do Community</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Painel Web Interativo</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Gestão Visual de Regras</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Relatórios e Estatísticas</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> API REST</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Suporte Prioritário</li>
+          </ul>
+          <a href="/login" class="mt-8 block bg-cyan-500 text-black text-center rounded-xl py-3 font-bold hover:bg-cyan-400 transition shadow-lg shadow-cyan-500/25">Começar Trial</a>
+        </div>
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-8 text-left">
+          <h3 class="text-xl font-bold">Enterprise</h3>
+          <div class="text-3xl font-bold mt-4">Sob Medida</div>
+          <p class="text-gray-500 text-sm mt-1">Para empresas com necessidades específicas</p>
+          <ul class="mt-6 space-y-3 text-sm text-gray-400">
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Tudo do Pro</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Multi-tenant</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> SLA Personalizado</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> Suporte 24/7</li>
+            <li class="flex items-center gap-2"><span class="text-cyan-400">&#10003;</span> On-premise ou Cloud</li>
+          </ul>
+          <a href="/contact" class="mt-8 block border border-gray-700 hover:border-cyan-500/50 rounded-xl py-3 font-semibold transition">Falar com Vendas</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="info-box">
-    <p><strong>🚀 Status:</strong> Painel admin ativo, CRUD de regras, logs de bloqueio, API REST, documentação embarcada. Login: <code>admin@firewallpro.com</code> / <code>admin123</code></p>
-  </div>
+  <!-- CTA -->
+  <section class="py-24 text-center relative">
+    <div class="hero-glow top-[-200px] left-[-200px]"></div>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <h2 class="text-4xl font-bold mb-6">Pronto para <span class="gradient-text">assumir o controle</span>?</h2>
+      <p class="text-xl text-gray-400 mb-10">Implante em segundos. Sem burocracia. Sem compromisso.</p>
+      <a href="/login" class="bg-cyan-500 hover:bg-cyan-400 text-black font-bold px-8 py-4 rounded-xl text-lg transition shadow-lg shadow-cyan-500/25">Começar Gratuitamente</a>
+    </div>
+  </section>
 
-  <div class="card-grid">
-    <div class="card-item"><h4>📊 Painel Admin</h4><p>Dashboard com estatísticas, regras ativas, logs recentes e gráficos</p></div>
-    <div class="card-item"><h4>📝 Regras de Firewall</h4><p>CRUD completo com toggle ativar/desativar, preview de iptables</p></div>
-    <div class="card-item"><h4>📋 Logs de Bloqueio</h4><p>Histórico com data, IP, domínio, chain e ação</p></div>
-    <div class="card-item"><h4>🌐 API REST</h4><p>Endpoints para gerenciar regras, consultar logs e estatísticas</p></div>
-    <div class="card-item"><h4>👥 Multi-tenant</h4><p>Usuários independentes com suas próprias regras e logs</p></div>
-    <div class="card-item"><h4>🔒 LGPD</h4><p>Logs de auditoria, criptografia em trânsito, relatórios de compliance</p></div>
-  </div>
-</section>
-
-<section id="features">
-  <h2>Funcionalidades</h2>
-  <table>
-    <tr><th>Funcionalidade</th><th>Descrição</th></tr>
-    <tr><td><strong>Painel Admin</strong></td><td>Dashboard com estatísticas, regras ativas, logs recentes</td></tr>
-    <tr><td><strong>CRUD de Regras</strong></td><td>Criação, edição, ativação/desativação com preview de iptables</td></tr>
-    <tr><td><strong>Logs de Bloqueio</strong></td><td>Histórico completo com data, IP, domínio, chain e ação</td></tr>
-    <tr><td><strong>API REST</strong></td><td>Endpoints para gerenciar regras, consultar logs e estatísticas</td></tr>
-    <tr><td><strong>Multi-tenant</strong></td><td>Usuários independentes com suas próprias regras</td></tr>
-    <tr><td><strong>Docker</strong></td><td>Deploy simplificado com docker compose</td></tr>
-    <tr><td><strong>Suporte Premium</strong></td><td>E-mail e chat prioritário (assinatura Pro)</td></tr>
-  </table>
-</section>
-
-<section id="instalacao">
-  <h2>Início Rápido</h2>
-
-  <h3>Local</h3>
-  <pre><code><span class="cm"># Clone</span>
-git clone https://github.com/TyagoAlves/firewall-pro.git
-cd firewall-pro
-
-<span class="cm"># Configure o ambiente</span>
-cp .env.example .env
-php artisan key:generate
-
-<span class="cm"># Instale dependências</span>
-composer install
-npm ci && npm run build
-
-<span class="cm"># Banco de dados e seed</span>
-php artisan migrate --seed
-
-<span class="cm"># Inicie o servidor</span>
-php artisan serve --host=0.0.0.0 --port=8000</code></pre>
-
-  <p>Acesse <strong>http://localhost:8000</strong> — login: <code>admin@firewallpro.com</code> / <code>admin123</code></p>
-
-  <h3>Docker</h3>
-  <pre><code>docker compose up -d</code></pre>
-</section>
-
-<section id="deploy">
-  <h2>Deploy em Produção</h2>
-  <pre><code><span class="cm"># Servidor Ubuntu/Debian</span>
-sudo apt install -y nginx php8.3-fpm php8.3-mbstring php8.3-xml \
-  php8.3-curl php8.3-sqlite3 php8.3-gd php8.3-zip unzip composer
-
-<span class="cm"># Clone e configure</span>
-cd /var/www
-git clone https://github.com/TyagoAlves/firewall-pro.git
-cd firewall-pro
-cp .env.example .env
-php artisan key:generate
-composer install --no-dev
-php artisan migrate --seed
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache</code></pre>
-
-  <p>Configure o Nginx com SSL para apontar para a pasta <code>public/</code>.</p>
-</section>
-
-<section id="api">
-  <h2>API REST</h2>
-  <p>A API permite gerenciar regras, consultar logs e estatísticas programaticamente.</p>
-
-  <table>
-    <tr><th>Endpoint</th><th>Método</th><th>Descrição</th></tr>
-    <tr><td><code>/api/rules</code></td><td>GET</td><td>Lista regras de firewall</td></tr>
-    <tr><td><code>/api/rules</code></td><td>POST</td><td>Cria nova regra</td></tr>
-    <tr><td><code>/api/rules/{id}</code></td><td>PUT</td><td>Atualiza regra</td></tr>
-    <tr><td><code>/api/rules/{id}</code></td><td>DELETE</td><td>Remove regra</td></tr>
-    <tr><td><code>/api/logs</code></td><td>GET</td><td>Consulta logs de bloqueio</td></tr>
-    <tr><td><code>/api/stats</code></td><td>GET</td><td>Estatísticas do firewall</td></tr>
-  </table>
-</section>
-
-<section id="suporte">
-  <h2>Licenciamento</h2>
-  <p>Este projeto é licenciado sob a <strong>MIT License</strong> — 100% open source.</p>
-
-  <p>Para suporte comercial (Pro): <strong>contato@firewallpro.com</strong></p>
-</section>
-
-</main>
-
-<footer>
-  <div class="container">
-    <p>Alpine Firewall Pro — Laravel · Tailwind · SQLite · Docker</p>
-    <p style="margin-top:0.3rem; font-size:0.8rem;">
-      <a href="https://github.com/TyagoAlves/firewall-pro">GitHub</a>
-    </p>
-  </div>
-</footer>
+  <!-- Footer -->
+  <footer class="bg-gray-900 border-t border-gray-800 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <span class="font-bold text-lg">Alpine<span class="text-cyan-400">Pro</span></span>
+          <p class="text-gray-500 text-sm mt-2">Firewall inteligente para PMEs. Código aberto, seguro e acessível.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Produto</h4>
+          <div class="space-y-2 text-sm text-gray-400">
+            <a href="/features" class="block hover:text-white">Recursos</a>
+            <a href="/pricing" class="block hover:text-white">Preços</a>
+            <a href="/documentation" class="block hover:text-white">Documentação</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Empresa</h4>
+          <div class="space-y-2 text-sm text-gray-400">
+            <a href="/security" class="block hover:text-white">Segurança & LGPD</a>
+            <a href="/contact" class="block hover:text-white">Contato</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-3">Legal</h4>
+          <div class="space-y-2 text-sm text-gray-400">
+            <a href="#" class="block hover:text-white">Política de Privacidade</a>
+            <a href="#" class="block hover:text-white">Termos de Uso</a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500">
+        &copy; 2026 Alpine Firewall Pro. Todos os direitos reservados. Feito com &hearts; no Brasil.
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>
